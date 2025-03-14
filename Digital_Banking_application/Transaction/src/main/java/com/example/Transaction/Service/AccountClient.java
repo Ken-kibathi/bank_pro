@@ -16,12 +16,8 @@ import java.math.BigDecimal;
 @FeignClient(name = "accounts")
 public interface AccountClient {
 
-    @GetMapping("/api/accounts/id/{accountId}")
-    AccountResponse getAccountById(@PathVariable Long accountId);
-
-
-    @PutMapping("/api/accounts/{accountId}")
-    void updateBalance(@RequestBody UpdateBalanceRequest request);
+    @GetMapping("/api/balance/{accountNumber}")
+    AccountResponse getBalance(@PathVariable String accountNumber);
 
     @GetMapping("/api/accounts/{accountNumber}")
     AccountResponse getAccountByAccNo(@PathVariable String accountNumber);

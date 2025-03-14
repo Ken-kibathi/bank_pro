@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
@@ -34,9 +35,19 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getAccountById(id));
     }
 
+    @GetMapping("/balance/{accountNumber}")
+    public ResponseEntity<Double> getAccountBalance(@PathVariable String accountNumber) {
+        Account account = accountService.getAccountBalance(accountNumber);
+        return ResponseEntity.ok(account.getBalance());
+    }
+
+
     @GetMapping("/number/{accountNumber}")
-    public ResponseEntity<Optional<Account>> getAccountByAccountNo(@PathVariable String accountNumber) {
-        return ResponseEntity.ok(accountService.getAccountByAccountNo(accountNumber));
+    public ResponseEntity<Account> getAccountByAccountNo(@PathVariable String accountNumber) {
+        Account account = accountService.getAccountByAccountNo(accountNumber)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Account not found for number: " + accountNumber));
+        return ResponseEntity.ok(account);
     }
 
     @PutMapping("/freeze/{id}")
