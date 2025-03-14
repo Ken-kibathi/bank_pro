@@ -5,7 +5,9 @@ import com.user.user.model.User;
 import com.user.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,19 +33,30 @@ public class AuthService {
                 .token(jwtToken)
                 .build();
     }
-
     public AuthResponse authenticate(AuthRequest request) {
+        User user = repository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new BadCredentialsException("Invalid credentials");
+        }
+
+        String token = jwtService.generateToken(user);
+        return new AuthResponse(token);
+    }
+ /*   public AuthResponse authenticate(AuthRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
+        System.out.println("Password is" + request.getPassword());
         var user =repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken=jwtService.generateToken(user);
         return  AuthResponse.builder()
                 .token(jwtToken)
                 .build();
-    }
+    }*/
 }

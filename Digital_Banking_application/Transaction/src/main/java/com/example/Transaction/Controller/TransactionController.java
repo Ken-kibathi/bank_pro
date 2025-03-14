@@ -35,6 +35,7 @@ public class TransactionController {
 
     @PostMapping("/transfer")
     public ResponseEntity<Transaction> transfer(@RequestBody TransferDto request) {
+        System.out.println("Update");
         Transaction transaction = transactionService.transfer(request.getFromAccount(),request.getToAccount(),
                 request.getAmount(), request.getDescription());
         return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
