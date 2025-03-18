@@ -9,12 +9,12 @@ import java.math.BigDecimal;
 @Getter
 public class DepositRequest {
     private String accountNumber;
-    private BigDecimal amount;
+    private double amount;
     private String description;
 
     public DepositRequest() {}
 
-    public DepositRequest(String accountNumber, BigDecimal amount, String description) {
+    public DepositRequest(String accountNumber, double amount, String description) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.description = description;

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class TransferDto {
     private String fromAccount;
     private String toAccount;
-    private BigDecimal amount;
+    private double amount;
     private String description;
 
 

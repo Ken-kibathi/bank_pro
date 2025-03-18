@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class WithdrawRequest {
     private String accountNumber;
-    private BigDecimal amount;
+    private double amount;
     private String description;
 
 

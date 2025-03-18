@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.security.auth.login.AccountNotFoundException;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
@@ -78,7 +77,7 @@ public class AccountService {
         Account account = accountRepository.findByAccountNumber(accountNumber);
              //   .orElseThrow(() -> new AccountNotFoundException("Account not found"));
 
-        account.setBalance(account.getBalance() + amount);
+        account.setBalance(account.getBalance()+(amount));
         accountRepository.save(account);
     }
 

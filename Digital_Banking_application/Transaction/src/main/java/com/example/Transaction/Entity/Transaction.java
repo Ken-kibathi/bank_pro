@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Transaction {
     private String targetAccountNumber;
 
     @Column(nullable = false)
-    private BigDecimal amount;
+    private double amount;
 
     private String description; // Optional transaction notes
 
@@ -43,9 +43,7 @@ public class Transaction {
     public Transaction(Long senderId, Long receiverId, double amount, TransactionType transactionType) {
     }
 
-    public static double getBalance() {
-        return getBalance();
-    }
+
 
 
     @PrePersist

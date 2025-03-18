@@ -16,13 +16,13 @@ import java.math.BigDecimal;
 @FeignClient(name = "accounts")
 public interface AccountClient {
 
-    @GetMapping("/api/balance/{accountNumber}")
+    @GetMapping("/api/accounts/balance/{accountNumber}")
     AccountResponse getBalance(@PathVariable String accountNumber);
 
     @GetMapping("/api/accounts/{accountNumber}")
     AccountResponse getAccountByAccNo(@PathVariable String accountNumber);
 
     @PutMapping("/api/accounts/{accountNumber}/{amount}")
-        void updateAccBalance(@PathVariable String accountNumber, @PathVariable BigDecimal amount);
+        void updateAccBalance(@PathVariable String accountNumber, @PathVariable double amount);
 
 }

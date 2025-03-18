@@ -2,6 +2,7 @@ package com.accounts.accounts.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.repository.Lock;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,8 +11,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Data
 @Table(name = "accounts")
 public class Account {
@@ -39,7 +39,7 @@ public class Account {
     private Date createdAt;
 
 
-    /*@Version
+/*@Version
     private Integer version;*/
 
 
